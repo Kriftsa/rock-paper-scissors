@@ -20,4 +20,13 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
 
-}
+    if ((playerSelection == "Rock" && computerSelection == "Scissors") ||
+        (playerSelection == "Scissors" && computerSelection == "Paper") ||
+        (playerSelection == "Paper" && computerSelection == "Rock")) {
+        return `You won! Your ${playerSelection} beats the computer's ${computerSelection}.`
+    } else {
+        return `Oh no, you lost! Your ${playerSelection} lost to the computer's ${computerSelection}.`
+    }
+    }
+
+console.log(playRound("Rock", getComputerChoice()))
