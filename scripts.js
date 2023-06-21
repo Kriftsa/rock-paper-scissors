@@ -26,6 +26,18 @@ function playRound(playerSelection, computerSelection) {
     let playerSelectionLower = playerSelection.toLowerCase()
     let computerSelectionLower = computerSelection.toLowerCase()
 
+    const validInputs = ['rock', 'scissors', 'paper'];
+
+    while (!validInputs.includes(playerSelectionLower)) {
+        const newPlayerSelection = prompt("User input not recognised, please try again");
+
+        if (newPlayerSelection === null) {
+            return "Cancelled";
+        }
+
+        playerSelectionLower = newPlayerSelection.toLocaleLowerCase();
+    }
+    
     if ((playerSelectionLower == "rock" && computerSelectionLower == "scissors") ||
         (playerSelectionLower == "scissors" && computerSelectionLower == "paper") ||
         (playerSelectionLower == "paper" && computerSelectionLower == "rock")) {
@@ -55,7 +67,7 @@ function game(numberRounds) {
 
     for (let i = 1; i <= numberRounds; i++) {
         
-        switch (playRound(prompt("Choose your selection"), getComputerChoice())) {
+        switch (playRound(prompt("Choose your selection (Round " + i + "/" + numberRounds + ")"), getComputerChoice())) {
             case 1:
                 
                 winsPlayer += 1;
