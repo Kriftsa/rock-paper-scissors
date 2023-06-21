@@ -55,7 +55,7 @@ function game(numberRounds) {
 
     for (let i = 1; i <= numberRounds; i++) {
         
-        switch (playRound("Rock", getComputerChoice())) {
+        switch (playRound(prompt("Choose your selection"), getComputerChoice())) {
             case 1:
                 
                 winsPlayer += 1;
