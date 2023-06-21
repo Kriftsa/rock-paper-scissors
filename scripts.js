@@ -23,15 +23,18 @@ function playRound(playerSelection, computerSelection) {
     let scorePlayer = 0
     let scoreComputer = 0
 
-    if ((playerSelection == "Rock" && computerSelection == "Scissors") ||
-        (playerSelection == "Scissors" && computerSelection == "Paper") ||
-        (playerSelection == "Paper" && computerSelection == "Rock")) {
-        console.log(`You won! Your ${playerSelection} beats the computer's ${computerSelection}.`)
+    let playerSelectionLower = playerSelection.toLowerCase()
+    let computerSelectionLower = computerSelection.toLowerCase()
+
+    if ((playerSelectionLower == "rock" && computerSelectionLower == "scissors") ||
+        (playerSelectionLower == "scissors" && computerSelectionLower == "paper") ||
+        (playerSelectionLower == "paper" && computerSelectionLower == "rock")) {
+        console.log(`You won! Your ${playerSelectionLower} beats the computer's ${computerSelectionLower}.`)
         scorePlayer = 1
-    } else if (playerSelection == computerSelection) {
-        console.log(`It's a draw! You both selected ${playerSelection}.`)
+    } else if (playerSelectionLower == computerSelectionLower) {
+        console.log(`It's a draw! You both selected ${playerSelectionLower}.`)
     } else {
-        console.log(`Oh no, you lost! Your ${playerSelection} lost to the computer's ${computerSelection}.`)
+        console.log(`Oh no, you lost! Your ${playerSelectionLower} lost to the computer's ${computerSelectionLower}.`)
         scoreComputer = 1
     }
 
