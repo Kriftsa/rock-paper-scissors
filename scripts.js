@@ -23,13 +23,17 @@ function playRound(playerSelection, computerSelection) {
     let scorePlayer = 0
     let scoreComputer = 0
 
+    if (playerSelection === null) {
+        return "Cancelled";
+    }
+
     let playerSelectionLower = playerSelection.toLowerCase()
     let computerSelectionLower = computerSelection.toLowerCase()
 
     const validInputs = ['rock', 'scissors', 'paper'];
 
     while (!validInputs.includes(playerSelectionLower)) {
-        const newPlayerSelection = prompt("User input not recognised, please try again");
+        const newPlayerSelection = prompt("User input not recognised, please try again", "Rock/Paper/Scissors");
 
         if (newPlayerSelection === null) {
             return "Cancelled";
@@ -67,7 +71,7 @@ function game(numberRounds) {
 
     for (let i = 1; i <= numberRounds; i++) {
         
-        switch (playRound(prompt("Choose your selection (Round " + i + "/" + numberRounds + ")"), getComputerChoice())) {
+        switch (playRound(prompt("Choose your selection (Round " + i + "/" + numberRounds + ")", "Rock/Paper/Scissors"), getComputerChoice())) {
             case 1:
                 
                 winsPlayer += 1;
@@ -79,6 +83,9 @@ function game(numberRounds) {
                 winsComputer += 1;
                 console.log(winsComputer)
                 break;
+
+            case "Cancelled":
+                return "User cancelled game"
 
             default:
                 break;
