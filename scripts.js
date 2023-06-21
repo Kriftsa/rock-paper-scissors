@@ -20,15 +20,29 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
 
+    let scorePlayer = 0
+    let scoreComputer = 0
+
     if ((playerSelection == "Rock" && computerSelection == "Scissors") ||
         (playerSelection == "Scissors" && computerSelection == "Paper") ||
         (playerSelection == "Paper" && computerSelection == "Rock")) {
-        return `You won! Your ${playerSelection} beats the computer's ${computerSelection}.`
+        console.log(`You won! Your ${playerSelection} beats the computer's ${computerSelection}.`)
+        scorePlayer = 1
     } else if (playerSelection == computerSelection) {
-        return `It's a draw! You both selected ${playerSelection}.`
+        console.log(`It's a draw! You both selected ${playerSelection}.`)
     } else {
-        return `Oh no, you lost! Your ${playerSelection} lost to the computer's ${computerSelection}.`
+        console.log(`Oh no, you lost! Your ${playerSelection} lost to the computer's ${computerSelection}.`)
+        scoreComputer = 1
     }
+
+    if (scorePlayer > scoreComputer) {
+        return 1
+    } else if (scorePlayer < scoreComputer) {
+        return -1
+    } else {
+        return 0
+    }
+
 }
 
 function game(numberRounds) {
