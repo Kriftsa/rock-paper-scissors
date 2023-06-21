@@ -29,6 +29,18 @@ function playRound(playerSelection, computerSelection) {
     } else {
         return `Oh no, you lost! Your ${playerSelection} lost to the computer's ${computerSelection}.`
     }
+}
+
+function game(numberRounds) {
+    
+    let winsPlayer = 0
+    let winsComputer = 0
+
+    for (let i = 1; i <= numberRounds; i++) {
+        
+        console.log(playRound("Rock", getComputerChoice()))
     }
 
-console.log(playRound("Rock", getComputerChoice()))
+}
+
+game(5)
