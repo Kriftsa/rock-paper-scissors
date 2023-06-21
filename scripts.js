@@ -52,9 +52,32 @@ function game(numberRounds) {
 
     for (let i = 1; i <= numberRounds; i++) {
         
-        console.log(playRound("Rock", getComputerChoice()))
+        switch (playRound("Rock", getComputerChoice())) {
+            case 1:
+                
+                winsPlayer += 1;
+                console.log(winsPlayer)
+                break;
+
+            case -1:
+            
+                winsComputer += 1;
+                console.log(winsComputer)
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    if (winsPlayer > winsComputer) {
+        return `Congratulations! You won ${winsPlayer} times while the computer won ${winsComputer} times!`
+    } else if (winsPlayer < winsComputer) {
+        return `Unlucky! You won ${winsPlayer} times while the computer won ${winsComputer} times!`
+    } else {
+        return `Wow! It was a draw! You both won ${winsPlayer} times!`
     }
 
 }
 
-game(5)
+    console.log(game(5))
