@@ -107,13 +107,13 @@ const btnpaper = document.querySelector('.paper')
 const btnscissors = document.querySelector('.scissors')
 
 btnRock.addEventListener('click', () => {
-    console.log(btnRock.className);
-  });
+    playRound(btnRock.className,getComputerChoice());
+});
 
 btnpaper.addEventListener('click', () => {
-console.log(btnpaper.className);
+    playRound(btnpaper.className,getComputerChoice());
 });
 
 btnscissors.addEventListener('click', () => {
-console.log(btnscissors.className);
+    playRound(btnscissors.className,getComputerChoice());
 });
