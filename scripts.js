@@ -102,18 +102,12 @@ function game(numberRounds) {
 
 }
 
-const btnRock = document.querySelector('button.rock')
-const btnPaper = document.querySelector('.paper')
-const btnScissors = document.querySelector('.scissors')
+const buttons = document.querySelectorAll('button');
 
-btnRock.addEventListener('click', () => {
-    playRound(btnRock.className,getComputerChoice());
-});
+buttons.forEach((button) => {
 
-btnPaper.addEventListener('click', () => {
-    playRound(btnPaper.className,getComputerChoice());
-});
+    button.addEventListener('click', () => {
+        playRound(button.className,getComputerChoice());
+    });
 
-btnScissors.addEventListener('click', () => {
-    playRound(btnScissors.className,getComputerChoice());
-});
+})
