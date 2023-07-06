@@ -102,4 +102,3 @@ function game(numberRounds) {
 
 }
 
-    console.log(game(5))
