@@ -102,3 +102,18 @@ function game(numberRounds) {
 
 }
 
+const btnRock = document.querySelector('button.rock')
+const btnpaper = document.querySelector('.paper')
+const btnscissors = document.querySelector('.scissors')
+
+btnRock.addEventListener('click', () => {
+    console.log(btnRock.className);
+  });
+
+btnpaper.addEventListener('click', () => {
+console.log(btnpaper.className);
+});
+
+btnscissors.addEventListener('click', () => {
+console.log(btnscissors.className);
+});
