@@ -2,6 +2,25 @@
 // Computer generates random selection
 // Determine who winner would be
 
+const container = document.querySelector('.buttons')
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+
+    button.addEventListener('click', () => {
+        playRound(button.className,getComputerChoice());
+    });
+
+})
+
+const results = document.createElement('div');
+results.classList.add('content');
+
+
+container.appendChild(results);
+
+results.textContent = 'Pick your choice';
+
 function getComputerChoice() {
     
     let compNumber = Math.floor(Math.random() * 3) +1 
@@ -45,12 +64,12 @@ function playRound(playerSelection, computerSelection) {
     if ((playerSelectionLower == "rock" && computerSelectionLower == "scissors") ||
         (playerSelectionLower == "scissors" && computerSelectionLower == "paper") ||
         (playerSelectionLower == "paper" && computerSelectionLower == "rock")) {
-        console.log(`You won! Your ${playerSelectionLower} beats the computer's ${computerSelectionLower}.`)
+        results.textContent = (`You won! Your ${playerSelectionLower} beats the computer's ${computerSelectionLower}.`)
         scorePlayer = 1
     } else if (playerSelectionLower == computerSelectionLower) {
-        console.log(`It's a draw! You both selected ${playerSelectionLower}.`)
+        results.textContent = (`It's a draw! You both selected ${playerSelectionLower}.`)
     } else {
-        console.log(`Oh no, you lost! Your ${playerSelectionLower} lost to the computer's ${computerSelectionLower}.`)
+        results.textContent = (`Oh no, you lost! Your ${playerSelectionLower} lost to the computer's ${computerSelectionLower}.`)
         scoreComputer = 1
     }
 
@@ -102,12 +121,3 @@ function game(numberRounds) {
 
 }
 
-const buttons = document.querySelectorAll('button');
-
-buttons.forEach((button) => {
-
-    button.addEventListener('click', () => {
-        playRound(button.className,getComputerChoice());
-    });
-
-})
