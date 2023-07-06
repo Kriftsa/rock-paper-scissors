@@ -1,11 +1,13 @@
-// Player enters selection
+// Player choose button
 // Computer generates random selection
 // Determine who winner would be
 
+// Setup scoring variables
 let winsPlayer = 0
 let winsComputer = 0
 let draws = 0
 
+// Select button containers. Reset Button not included
 const container = document.querySelector('.buttons')
 const buttons = document.querySelectorAll('button:not(.reset)');
 
@@ -17,26 +19,29 @@ buttons.forEach((button) => {
     
 })
 
+// Define reset button separately
 const resetButton = document.querySelector('.reset')
 
 resetButton.addEventListener('click', () => {
     resetGame()
 })
 
+// Create a row for the last game result and the running score
 const lastGame = document.createElement('div');
 lastGame.classList.add('lastGame');
 
 const runningScore = document.createElement('div');
 runningScore.classList.add('runningScore');
 
-
 container.appendChild(lastGame);
 container.appendChild(runningScore);
 
+// Call the resetGame function before first run to ensure all is clean
 resetGame
 
 function getComputerChoice() {
-    
+    //Use a random number to determine the computer's selection
+
     let compNumber = Math.floor(Math.random() * 3) +1 
 
     switch (compNumber) {
@@ -52,6 +57,7 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+    // Compare the players selection against the computers selection and choose the winner
 
     let scorePlayer = 0
     let scoreComputer = 0
@@ -60,11 +66,13 @@ function playRound(playerSelection, computerSelection) {
         return "Cancelled";
     }
 
+    // Sensitise both inputs by converting to lower case
     let playerSelectionLower = playerSelection.toLowerCase()
     let computerSelectionLower = computerSelection.toLowerCase()
 
     const validInputs = ['rock', 'scissors', 'paper'];
 
+    // If user input is not found within validInputs display a prompt
     while (!validInputs.includes(playerSelectionLower)) {
         const newPlayerSelection = prompt("User input not recognised, please try again", "Rock/Paper/Scissors");
 
@@ -75,6 +83,7 @@ function playRound(playerSelection, computerSelection) {
         playerSelectionLower = newPlayerSelection.toLocaleLowerCase();
     }
     
+    // Compare player selection and computer selection and result
     if ((playerSelectionLower == "rock" && computerSelectionLower == "scissors") ||
         (playerSelectionLower == "scissors" && computerSelectionLower == "paper") ||
         (playerSelectionLower == "paper" && computerSelectionLower == "rock")) {
@@ -87,6 +96,7 @@ function playRound(playerSelection, computerSelection) {
         scoreComputer = 1
     }
 
+    // Use result to return value which is used in switch in game function
     if (scorePlayer > scoreComputer) {
         return 1
     } else if (scorePlayer < scoreComputer) {
@@ -98,7 +108,8 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game(playerSelection) {
-
+    // Take the players input and use the playRound function to find a winner
+    // Check for a winner after each round
 
     switch (playRound(playerSelection, getComputerChoice())) {
         case 1:
@@ -129,6 +140,7 @@ function game(playerSelection) {
 }
 
 function checkWinner() {
+    // Check if the required number of rounds has been played. If so, find the winner
 
     let numberRounds = 5
 
@@ -145,6 +157,7 @@ function checkWinner() {
 }
 
 function resetGame() {
+    // Sensitise all inputs for a blacnk canvas
 
     winsPlayer = 0
     winsComputer = 0
