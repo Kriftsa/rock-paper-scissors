@@ -2,24 +2,38 @@
 // Computer generates random selection
 // Determine who winner would be
 
+let winsPlayer = 0
+let winsComputer = 0
+let draws = 0
+
 const container = document.querySelector('.buttons')
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('button:not(.reset)');
 
 buttons.forEach((button) => {
 
     button.addEventListener('click', () => {
-        playRound(button.className,getComputerChoice());
+        game(button.className,getComputerChoice());
     });
-
+    
 })
 
-const results = document.createElement('div');
-results.classList.add('content');
+const resetButton = document.querySelector('.reset')
+
+resetButton.addEventListener('click', () => {
+    resetGame()
+})
+
+const lastGame = document.createElement('div');
+lastGame.classList.add('lastGame');
+
+const runningScore = document.createElement('div');
+runningScore.classList.add('runningScore');
 
 
-container.appendChild(results);
+container.appendChild(lastGame);
+container.appendChild(runningScore);
 
-results.textContent = 'Pick your choice';
+resetGame
 
 function getComputerChoice() {
     
@@ -64,12 +78,12 @@ function playRound(playerSelection, computerSelection) {
     if ((playerSelectionLower == "rock" && computerSelectionLower == "scissors") ||
         (playerSelectionLower == "scissors" && computerSelectionLower == "paper") ||
         (playerSelectionLower == "paper" && computerSelectionLower == "rock")) {
-        results.textContent = (`You won! Your ${playerSelectionLower} beats the computer's ${computerSelectionLower}.`)
+        lastGame.textContent = (`You won! Your ${playerSelectionLower} beats the computer's ${computerSelectionLower}.`)
         scorePlayer = 1
     } else if (playerSelectionLower == computerSelectionLower) {
-        results.textContent = (`It's a draw! You both selected ${playerSelectionLower}.`)
+        lastGame.textContent = (`It's a draw! You both selected ${playerSelectionLower}.`)
     } else {
-        results.textContent = (`Oh no, you lost! Your ${playerSelectionLower} lost to the computer's ${computerSelectionLower}.`)
+        lastGame.textContent = (`Oh no, you lost! Your ${playerSelectionLower} lost to the computer's ${computerSelectionLower}.`)
         scoreComputer = 1
     }
 
@@ -83,41 +97,60 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-function game(numberRounds) {
-    
-    let winsPlayer = 0
-    let winsComputer = 0
+function game(playerSelection) {
 
-    for (let i = 1; i <= numberRounds; i++) {
-        
-        switch (playRound(prompt("Choose your selection (Round " + i + "/" + numberRounds + ")", "Rock/Paper/Scissors"), getComputerChoice())) {
-            case 1:
-                
-                winsPlayer += 1;
-                console.log(winsPlayer)
-                break;
 
-            case -1:
+    switch (playRound(playerSelection, getComputerChoice())) {
+        case 1:
             
-                winsComputer += 1;
-                console.log(winsComputer)
-                break;
+            winsPlayer += 1;
+            break;
 
-            case "Cancelled":
-                return "User cancelled game"
+        case -1:
+        
+            winsComputer += 1;
+            break;
 
-            default:
-                break;
-        }
+        case 0:
+
+            draws += 1;
+            break;
+
+        case "Cancelled":
+            return "User cancelled game"
+
+        default:
+            break;
     }
 
-    if (winsPlayer > winsComputer) {
-        return `Congratulations! You won ${winsPlayer} times while the computer won ${winsComputer} times!`
-    } else if (winsPlayer < winsComputer) {
-        return `Unlucky! You won ${winsPlayer} times while the computer won ${winsComputer} times!`
-    } else {
-        return `Wow! It was a draw! You both won ${winsPlayer} times!`
-    }
+    runningScore.textContent = (`Score is ${winsPlayer} to ${winsComputer}.`)
+    checkWinner()
 
 }
 
+function checkWinner() {
+
+    let numberRounds = 5
+
+    if (winsPlayer + winsComputer + draws == numberRounds) {
+
+        if (winsPlayer > winsComputer) {
+            runningScore.textContent =  `Congratulations! You won ${winsPlayer} times while the computer won ${winsComputer} times!`
+        } else if (winsPlayer < winsComputer) {
+            runningScore.textContent =  `Unlucky! You won ${winsPlayer} times while the computer won ${winsComputer} times!`
+        } else {
+            runningScore.textContent =  `Wow! It was a draw! You both won ${winsPlayer} times!`
+        }
+    }
+}
+
+function resetGame() {
+
+    winsPlayer = 0
+    winsComputer = 0
+    draws = 0
+
+    lastGame.textContent = 'Pick your choice';
+    runningScore.textContent = 'Score is nil all';
+
+}
